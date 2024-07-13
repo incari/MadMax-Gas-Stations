@@ -20,7 +20,7 @@ export const Row: React.FC<GasStationRowProps> = ({
   const volumes = Object.keys(prices);
 
   return (
-    <tr className="item">
+    <tr className={` ${cheaper ? "bg-yellow-500/50" : "item"}  `}>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 relative">
         {cheaper && (
           <span className="absolute -top-2 left-1 p-0.5 rounded-md bg-yellow-400 border-[1px] border-black">

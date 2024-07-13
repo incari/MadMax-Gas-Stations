@@ -2,7 +2,7 @@
 const stationCount = 10;
 const volumes = [1, 3, 5, 15];
 
-const refreshPriceEvery = 1 * 1000;
+const refreshPriceEvery = 30 * 1000;
 
 const priceRanges = [
   { min: 3.5, max: 4 },
