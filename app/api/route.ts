@@ -12,6 +12,7 @@ import { refreshPriceEvery } from "./contants";
 let gasPrices: GasPrices[] = generateGasPrices();
 let lastUpdated = Date.now();
 
+export const dynamic = "force-dynamic";
 export async function GET() {
   const now = Date.now();
   if (now - lastUpdated > refreshPriceEvery) {
