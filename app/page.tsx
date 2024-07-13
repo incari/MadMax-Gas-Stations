@@ -25,7 +25,7 @@ export default function Home() {
       <div className="mb-4">
         <label
           htmlFor="liters"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="block text-lg font-bold text-gray-100 mb-2 bg-gray-500/15 w-fit"
         >
           Liters to buy
         </label>
