@@ -1,10 +1,11 @@
 "use client";
+
 import useSWR from "swr";
-import { Table } from "./components/Table/Table";
 import { useState } from "react";
 import { StationsPrices } from "./api/types";
 import { refreshPriceEvery, updateDataEvery } from "./api/constants";
 import { ButtonNumber } from "./components/ButtonNumber/ButtonNumber";
+import { Table } from "./components/Table";
 
 const fetcher = async (
   url: string,
