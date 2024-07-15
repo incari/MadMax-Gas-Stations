@@ -3,7 +3,6 @@ import useSWR from "swr";
 import { Table } from "./components/Table/Table";
 import { useState } from "react";
 import { StationsPrices } from "./api/types";
-import Hero from "./components/Hero/Hero";
 
 const fetcher = async (url: string): Promise<StationsPrices> => {
   const response = await fetch(url);
