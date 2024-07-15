@@ -3,7 +3,8 @@ const stationCount = 10;
 const volumes = [1, 3, 5, 15];
 
 const updateDataEvery = 30;
-const refreshPriceEvery = 5;
+const refreshPriceEvery = 10;
+const defaultGas = 44;
 
 const priceRanges = [
   { min: 3.5, max: 4 },
@@ -18,4 +19,5 @@ export {
   priceRanges,
   refreshPriceEvery,
   updateDataEvery,
+  defaultGas,
 };

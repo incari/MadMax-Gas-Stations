@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GasPrices } from "../../api/types";
+import { volumes } from "../../api/constants";
 
 type GasStationRowProps = {
   stationName: string;
@@ -16,8 +17,6 @@ export const Row: React.FC<GasStationRowProps> = ({
   cheaper,
 }) => {
   if (!stationName || !prices) return null; // Handle null or undefined props gracefully
-
-  const volumes = Object.keys(prices);
 
   return (
     <tr className={` ${cheaper ? "bg-yellow-500/50" : "item"}  `}>

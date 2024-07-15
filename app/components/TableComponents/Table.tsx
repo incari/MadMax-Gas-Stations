@@ -1,3 +1,4 @@
+import { volumes } from "../../api/constants";
 import { StationsPrices } from "../../api/types";
 import {
   calculateBottles,
@@ -5,8 +6,6 @@ import {
   findCheapestIndex,
 } from "../../utils/helpers";
 import { Row } from "./Row";
-
-const volumes = [1, 3, 5, 15]; // Define the volumes array
 
 type TableProps = StationsPrices & {
   liters: number;
