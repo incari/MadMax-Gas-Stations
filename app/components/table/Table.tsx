@@ -1,12 +1,10 @@
-import React from "react";
-
-import { Row } from "./Row";
 import { StationsPrices } from "../../api/types";
 import {
   calculateBottles,
   calculateTotalPrice,
   findCheapestIndex,
 } from "../../utils/helpers";
+import { Row } from "./Row";
 
 const volumes = [1, 3, 5, 15]; // Define the volumes array
 
