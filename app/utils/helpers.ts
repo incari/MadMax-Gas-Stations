@@ -1,35 +1,38 @@
+import { GasPrices, GasStation, GasPrice, BottleSizes } from "../api/types";
 import { priceRanges, stationCount, volumes } from "../api/constants";
 
-import { BottleSizes, GasPrices } from "../api/types";
-
-function generatePrices() {
+function generatePrices(): number[] {
   return priceRanges.map((range) =>
     Number((Math.random() * (range.max - range.min) + range.min).toFixed(2))
   );
 }
 
-export function generateGasPrices(): GasPrices[] {
+export function generateGasPrices(): GasPrices {
   return Array.from({ length: stationCount }, (_, stationIndex) => {
     const prices = generatePrices();
 
-    const priceObj: { [volume: string]: number } = {};
-    volumes.forEach((volume, index) => {
-      priceObj[volume] = prices[index];
-    });
+    const gasPrices: GasPrice[] = volumes.map((volume, index) => ({
+      volume: volume.toString(), // Ensure volume is a string
+      price: prices[index],
+    }));
 
-    return { [`Station ${stationIndex + 1}`]: priceObj };
+    return {
+      name: `Station ${stationIndex + 1}`,
+      prices: gasPrices,
+    };
   });
 }
 
 export function calculateBottles(liters: number): BottleSizes {
-  const bottleSizes = [15, 5, 3, 1]; // Available bottle sizes, sorted in descending order
+  const bottleSizes = ["15", "5", "3", "1"]; // Available bottle sizes, sorted in descending order
   const result: BottleSizes = {};
 
   for (const size of bottleSizes) {
-    const quantity = Math.floor(liters / size);
+    const volume = parseInt(size, 10);
+    const quantity = Math.floor(liters / volume);
     if (quantity > 0) {
-      result[size.toString()] = quantity;
-      liters -= quantity * size; // Subtract the amount covered by this bottle size
+      result[size] = quantity;
+      liters -= quantity * volume; // Subtract the amount covered by this bottle size
     }
     if (liters <= 0) break; // If all liters are covered, exit early
   }
@@ -39,29 +42,25 @@ export function calculateBottles(liters: number): BottleSizes {
 
 export function calculateTotalPrice(
   total: BottleSizes,
-  stationsPrices: GasPrices[]
+  stationsPrices: GasPrices
 ): number[] {
-  const totals: number[] = stationsPrices.map((stationPrices) => {
-    let totalPrice: number = 0;
+  const totals: number[] = stationsPrices.map((station) => {
+    let totalPrice = 0;
 
-    for (const stationName in stationPrices) {
-      const prices = stationPrices[stationName];
-
-      for (const volume in total) {
-        if (prices[volume] !== undefined) {
-          const priceByVolume = prices[volume] * total[volume];
-          totalPrice += priceByVolume;
-        }
+    for (const { volume, price } of station.prices) {
+      if (total[volume]) {
+        const priceByVolume = price * total[volume];
+        totalPrice += priceByVolume;
       }
     }
 
-    return Number(totalPrice.toFixed(2)); // Convert total price to number and fix to 2 decimal places
+    return Number(totalPrice.toFixed(2));
   });
 
   return totals;
 }
 
-export function findCheapestIndex(totals: number[]) {
+export function findCheapestIndex(totals: number[]): number {
   if (totals.length === 0) return -1;
 
   let min = totals[0];

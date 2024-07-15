@@ -1,5 +1,5 @@
 import { volumes } from "../../api/constants";
-import { StationsPrices } from "../../api/types";
+import { GasPrices } from "../../api/types";
 import {
   calculateBottles,
   calculateTotalPrice,
@@ -7,7 +7,8 @@ import {
 } from "../../utils/helpers";
 import { Row } from "./Row";
 
-type TableProps = StationsPrices & {
+type TableProps = {
+  stationsPrices: GasPrices;
   liters: number;
 };
 
@@ -43,20 +44,15 @@ export const Table: React.FC<TableProps> = ({ stationsPrices, liters }) => {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {stationsPrices.map((station, index) => {
-            const stationName = Object.keys(station)[0];
-            const prices = station[stationName];
-
-            return (
-              <Row
-                key={index}
-                stationName={stationName}
-                prices={prices}
-                total={totalByStation[index]}
-                cheaper={cheaper === index}
-              />
-            );
-          })}
+          {stationsPrices.map((station, index) => (
+            <Row
+              key={station.name}
+              stationName={station.name}
+              prices={station.prices}
+              total={totalByStation[index]}
+              cheaper={cheaper === index}
+            />
+          ))}
         </tbody>
       </table>
     </div>

@@ -1,11 +1,10 @@
 import React from "react";
-
-import { GasPrices } from "../../api/types";
+import { GasPrice } from "../../api/types";
 import { volumes } from "../../api/constants";
 
 type GasStationRowProps = {
   stationName: string;
-  prices: { [volume: string]: number };
+  prices: GasPrice[];
   total: number;
   cheaper: boolean;
 };
@@ -17,6 +16,11 @@ export const Row: React.FC<GasStationRowProps> = ({
   cheaper,
 }) => {
   if (!stationName || !prices) return null; // Handle null or undefined props gracefully
+
+  const priceMap = prices.reduce((acc, { volume, price }) => {
+    acc[volume] = price;
+    return acc;
+  }, {} as { [volume: string]: number });
 
   return (
     <tr className={` ${cheaper ? "bg-yellow-500/50" : "item"}  `}>
@@ -33,7 +37,7 @@ export const Row: React.FC<GasStationRowProps> = ({
           key={volume}
           className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell"
         >
-          {prices[volume as keyof GasPrices[0]].toFixed(2)}€
+          {priceMap[volume]?.toFixed(2)}€
         </td>
       ))}
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
