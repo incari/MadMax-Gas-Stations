@@ -1,4 +1,4 @@
-import { priceRanges, stationCount, volumes } from "../api/contants";
+import { priceRanges, stationCount, volumes } from "../api/constants";
 
 import { BottleSizes, GasPrices } from "../api/types";
 

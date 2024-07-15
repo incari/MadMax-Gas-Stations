@@ -2,7 +2,8 @@
 const stationCount = 10;
 const volumes = [1, 3, 5, 15];
 
-const refreshPriceEvery = 30 * 1000;
+const updateDataEvery = 30;
+const refreshPriceEvery = 5;
 
 const priceRanges = [
   { min: 3.5, max: 4 },
@@ -11,4 +12,10 @@ const priceRanges = [
   { min: 41, max: 42 },
 ];
 
-export { stationCount, volumes, refreshPriceEvery, priceRanges };
+export {
+  stationCount,
+  volumes,
+  priceRanges,
+  refreshPriceEvery,
+  updateDataEvery,
+};
