@@ -10,6 +10,7 @@ import {
 } from "./api/constants";
 import { ButtonNumber } from "./components/ButtonNumber/ButtonNumber";
 import { Table } from "./components/TableComponents";
+import { TableSkeleton } from "./components/TableComponents/TableSkeleton";
 
 const fetcher = async (
   url: string,
@@ -56,7 +57,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="px-24 pt-12">
+      <div className="px-24 pt-12 w-full">
         <div className="mb-4 flex items-center flex-col">
           <label
             htmlFor="liters"
@@ -68,9 +69,9 @@ export default function Home() {
             value={gas}
             setValue={setGas}
           />
-          <div className="">
+          <div className="w-full max-w-3xl">
             {error && <div>Failed to load</div>}
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <TableSkeleton />}
             {data && (
               <Table
                 stationsPrices={data.stationsPrices}

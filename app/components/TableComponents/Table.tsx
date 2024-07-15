@@ -30,7 +30,11 @@ export const Table: React.FC<TableProps> = ({ stationsPrices, liters }) => {
                 key={volume}
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell"
               >
-                {`${volume}L (${totalBottles[volume] || 0})`}
+                {`${volume}L `}
+
+                <span className={totalBottles[volume] ? "text-yellow-600" : ""}>
+                  ({totalBottles[volume] || 0})
+                </span>
               </th>
             ))}
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
