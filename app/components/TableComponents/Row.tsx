@@ -1,4 +1,3 @@
-import React from "react";
 import { GasPrice } from "../../api/types";
 import { volumes } from "../../api/constants";
 

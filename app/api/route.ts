@@ -3,7 +3,7 @@ import { generateGasPrices } from "../utils/helpers";
 import { GasPrices } from "./types";
 import { updateDataEvery } from "./constants";
 
-let gasPrices: GasPrices = generateGasPrices(); // Adjusted type to GasPrices
+let gasPrices: GasPrices = generateGasPrices();
 let lastUpdated = Date.now();
 
 export const dynamic = "force-dynamic";

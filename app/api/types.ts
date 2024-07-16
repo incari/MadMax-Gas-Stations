@@ -1,15 +1,3 @@
-/* // Type to be extendable to more stations and volumes.
-
-
-export type GasPrices = {
-  [stationName: string]: BottleSizes;
-};
-
-export type BottleSizes = {
-  [volume: string]: number;
-};
- */
-
 export type StationsPrices = {
   stationsPrices: GasPrices;
 };
